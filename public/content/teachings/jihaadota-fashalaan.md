@@ -1,2 +1,19 @@
 ﻿# Jihaadota Fashalaa'an
 
+Jihaadota Fashalaa’an
+Jihaadistoonni giddu-gala kiristiyaanaa weeraruun hanguma isaaniif milkaa’e, milkaa’ina dhabuus keessumsiisaniiru. Keessumaa waraana Tursiifi Viyeenaa irratti carraa gaarii dhabuu isaanii yaaduudhaan mudannoo seenaa baay’ee kan itti gaabbaniidha.
+
+Waraana Tursii (Paayitirisii)
+Tursiin bakka seenawaa Faransaayii keessatti argamtuudha. Waraanichi kan godhame Ispeenii gara baha Awurooppaa kan imalan weerartoota Arabaafi kiristaanota Faransaayi gidduutti ture.  Waraanni Umayaad Kaalifeet Abdul rahimaan Al-Gaafiiq kan jedhamu Al-Andalushiyaa (Ispeen) Emiriin kan hogganamu yommuu ta’u, loltootni Faransaayi ammoo ajajaa waraanaa Chaarlis Maartel[1] jedhamuun ture. Loltoonni lamaan waxabajjii 10/bara 732 walitti dhufanii qabsoo obsa fixachiisaa godhaniiru. Waraana kanatti Abdul-Rahimaan kan ajjeefame yommuu ta’u, humni waraana Arabaa isaatiin hogganamu balaa guddaan irra ga’ee mo’atamuu isaatiin duubatti deebi’eera. Kana booda waraanni islaamummaa guutummaa Awurooppaa sallamsiisuuf waraana guddaa hanga sana ga’uun weerara taasisuuf hanga waggaa 700 eeguu qaba ture. [2]
+
+Marfamuu Viyeenaa
+Haala taa’umsa lafaa gaarii qabaachuu isheetiin kan ka’e magalaa gudditti Ostiriyaa kan taate Viyeenaa qabachuun Turkootaaf abjuu yeroo dheeraa ture. Ottomanoonni daangaa mootummaa Roomaa bahaa kan ture Biizaantaayinii weeraruun Qusxinxiniyaa ega qabatanii booda Griik, Bulgaariyaa, Roomaaniyaa, Sarbiyaafi k.k.f biyyoota bahaa Awurooppaa to’annaa jala olchuun isaaniif milkaa’eera. Guutummaa Awurooppaa sallamsiisuuf abjuu isaanii dhugoomsuuf Ostiriyaa irratti haleellaa walirraa hin cinne raawwachuun bara 1529 Viyeenaa kan marsan yoo ta’aniyyuu otuu isaaniif hin milkaa’in hafuu isaatiin, irra deebi’anii jabaatanii dhufuun bara 1683 weerara godhaniiru. Wayita weerara kanatti deemsa isaanii irratti magaalotaafi mandaroota kan balleessan yommuu ta’u kiristaanota hedduu booji’aniiru. Mootii Ostiriyaa kan ture Li’oopaald loltoota 11,000 fi lammii fedha qaban 5,000 qindeessuun magalattiin akka hin qabamne yoo qabsaa’eyyuu, humni isaa ajajaa waraanaa Turkii Kaarraa Muusxafaa Paashaan hogganamu waraana islaama 150,000 waliin kan gitu hin turre. Mootii Poolaand kan ture Saalisaawii Joon Soobiyeeskii loltoota 30,000 waliin otuu hin geenyeef ta’ee qabamuun magaalattii shakkii kan hin qabne ture. Poolaandiin dabalatee waraana kanarratti loltootni Ostiriyaa 18,500, loltoota Saaksiin 9,000 fi 19,000 kan Faransaay, Suwaabiyootaafi Baaraaviyaanoota kan ta’an loltoonni tokkummaan ta’anii hirmaataniiru. Soobiyooskiin dandeetti waraana guddaa isaatti fayyadamuun loltoota kana ega qindeessee booda fulbaana 12, bara 1683 warra Turkii irratti haleellaa bane. Qabsoo murteessaa hanga sa’aa 12 fudhate kanaan humni Turkootaa dadhabeera. Waraanni Islaamaa mo’amuu isaa hubate boji’amoota harka isaa keessa jiran irratti ajjeechaa ega raawwatee booda qabeenya hedduu of harkaa gatuun lubbuu isaa oolfachuuf baqateera. Mo’amuu isaaniin gaddaafi salphina guddaa keessa kan seenan Turkoonni Kaarraa Muusxafaa Paashaa itti gaafatamaa gochuun Onkololeessa 25, bara 1683 Beelgireedii kan jedhamu keessatti haala sukkanneessaan du’aan isa adabaniiru. Yeroo sanaa boodaa waraanni jihaad bifa kanaan weerara taasisuuf deebi’ee gara lixa Awurooppaatti hin deebine. [3]
+
+Araboonniifi Turkoonni waraanota sana injifataniiru otuu ta’ee guutummaa hawaasa lixaa sallamsiisuuf carraa kan qaban waan turaniif, Allaan amantaalee hedduu keessaa isa hangafaa gochuuf waadan inni Qur’aana keessatti gale dhugaa ta’a ture (Suuraa 9:33). Garuu abdiin kun hanga ammaatti abdii ta’ee itti fufeera.
+
+
+[1] ‹Maarteel› ‹burruusa› jechuu yommuu ta’u sababa injifannoo jihaadistoota irratti argateef maqaa dabalataa isaaf laatamedha
+
+[2] Encayclopedia Britannica www.Britannica.com/event/Battle-of-Toure
+
+[3] Ibid., www. Britannica. com/event/ Siege-of –Vienna-1683
