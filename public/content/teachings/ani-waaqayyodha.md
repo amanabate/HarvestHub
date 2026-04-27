@@ -1,0 +1,9 @@
+# "Ani Waaqayyodha na Waaqessaa" Jedhanii Dubbachuun Waaqummaa kan Mirkaneessudha?
+
+## “Ani Waaqayyodha na Waaqessaa” Jedhanii Dubbachuun Waaqummaa kan Mirkaneessudha?
+
+## Yesus “ani Waaqayyodha na waaqessaa” jedhee dubbachuu manna “Ani Waaqayyo miti nan waaqessinaa” jedhee dubbachuu dhiisuun isaa waaqummaasaa isaa mirkaneessa. Maal jechuu keeti hin jettaniiree?
+
+Qaamni tokko Waaqayyo kan ta’u amaloota Waaqummaa yoo qabaate qofa malee ani Waaqayyoodha jechuusaatiin Waaqayyo ta’uu hin danda’u. Bara Fari’oonota Gibxiifi mootota Roomaanota eegalee hanga bara keenyaa warreen ani Kristos ofin jedhanitti namoonni “Ani Waaqayyodha” jedhan hedduun ibsamuu malu. Garuu akka isaa Waaqayyodha ofiin yoo jedhan Waaqayyo isaan hin jechisiisu. Waaqayyo ta’uusaanii labsuun namoonni gowwomsan seenaa ilmaan namaa keessatti irra deddeebi’anii gama mul’achuu isaaniin dubbiin akkanaa ulaagaa Waaqummaa guutuuf kan malu miti. Ulaagaan inni sirriin qaamni tokko amaloota Waaqummaa calaqqisiiseera? Kan jedhu malee ani Waaqayyodha jedheera? Kan jedhu miti.
+
+Faallaa kanaan Yesus Waaqayyo ta’uusaa dubbachuu dhiisuun isaa Waaqummaan isaa kan ittiin mirkaneeffamu ta’uusaatiin “ani Waaqayyo miti nan waaqessiinaa” bakka jedhee dubbate akka nu argisiisaniif obboleeyyan keenya Musliimaa yoo gaafanne waanuma ta’uu  maluudha. Kitaaba Qulqulluu keessatti namoonni ulfina Waaqayyoof malu yoo kennan nama malee Waaqayyo ta’uu dhiisuu isaanii yoo ibsan argina (HoE. 14: 11-18). Yesus garuu hojii isaa ilaalanii “ilma Waaqayyoo ti” jedhanii namoonni yoo sagadaniif, waaqeessanii fi “”Waaqakoo” jechuudhaan yoo isa waaman mormii dhageessisuu mannaa hojiifi dubbii isaanii yoo fudhatu argina. Kanaafuu Waaqayyo waan hin taaneef dubbachuu dhiisuun isaa Waaqummaan isaa kan ittiin mirkaneeffamuudha.
