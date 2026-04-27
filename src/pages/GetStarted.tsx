@@ -93,6 +93,21 @@ const cardSlugMap: Record<string, string> = {
   "Macaafa Qulqulluu Keessati Dogoggorawwan Kuma Shantamni jiru?": "dogoggorawwan-kuma",
   "Soba Ahimad Diidaa": "soba-ahimad",
   "Kaa'ibaa – Waaqa Tolfamaa Islaamummaa!": "kaabaa",
+  "Seensa": "dhuga-seensa",
+  "Boqonnaa 1 – Humnaa fi Jaalala Waaqayyoo": "dhuga-boq1",
+  "Boqonnaa 2 – Jireenya Muhaammad": "dhuga-boq2",
+  "Boqonnaa 3 – Seenaa Gabaabaa Islaamummaa": "dhuga-boq3",
+  "Boqonnaa 4 – Seenaa Islaamummaa Afrikaa Keessatti": "dhuga-boq4",
+  "Boqonnaa 5 – Utubaalee Islaamummaa Shanan": "dhuga-boq5",
+  "Boqonnaa 6 – Amantaalee Islaamummaan Yaada Irraa Waraabbate": "dhuga-boq6",
+  "Boqonnaa 7 – Garaagarummaawwan Islaamummaa Keessatti Argaman": "dhuga-boq7",
+  "Boqonnaa 8 – Qur'aana": "dhuga-boq8",
+  "Boqonnaa 9 – Aadafi Seerota Musliimotaa": "dhuga-boq9",
+  "Boqonnaa 10 – Aadafi Ilaalcha Musliimotaa": "dhuga-boq10",
+  "Boqonnaa 11 – Dubartoota Islaamummaa Keessatti": "dhuga-boq11",
+  "Boqonnaa 12 – Musliimonni Warra Musliima Hintaane Akkamitti Ilaalu?": "dhuga-boq12",
+  "Boqonnaa 13 – Musliimotaaf Akkamitti Ragaa Baana?": "dhuga-boq13",
+  "Hiika Jechootaa/Glossary": "dhuga-glossary",
 };
 
 type Note = { id: string; text: string; createdAt: string };
@@ -173,6 +188,25 @@ export default function GetStarted() {
         { title: "Sheeyxana Funyaan Musliimotaa Keessa Jiraatu" },
         { title: "Haalli Du'aatii Muhammad Nabiyyii Sobaa Ta'uu Isaa Mirkaneessa" },
         { title: "Qamaleen Dhagaan Rukutamuun Ajjeefamte!" },
+      ];
+    }
+    if (activeItem === "Dhuga Ba'iinsota") {
+      return [
+        { title: "Seensa" },
+        { title: "Boqonnaa 1 – Humnaa fi Jaalala Waaqayyoo" },
+        { title: "Boqonnaa 2 – Jireenya Muhaammad" },
+        { title: "Boqonnaa 3 – Seenaa Gabaabaa Islaamummaa" },
+        { title: "Boqonnaa 4 – Seenaa Islaamummaa Afrikaa Keessatti" },
+        { title: "Boqonnaa 5 – Utubaalee Islaamummaa Shanan" },
+        { title: "Boqonnaa 6 – Amantaalee Islaamummaan Yaada Irraa Waraabbate" },
+        { title: "Boqonnaa 7 – Garaagarummaawwan Islaamummaa Keessatti Argaman" },
+        { title: "Boqonnaa 8 – Qur'aana" },
+        { title: "Boqonnaa 9 – Aadafi Seerota Musliimotaa" },
+        { title: "Boqonnaa 10 – Aadafi Ilaalcha Musliimotaa" },
+        { title: "Boqonnaa 11 – Dubartoota Islaamummaa Keessatti" },
+        { title: "Boqonnaa 12 – Musliimonni Warra Musliima Hintaane Akkamitti Ilaalu?" },
+        { title: "Boqonnaa 13 – Musliimotaaf Akkamitti Ragaa Baana?" },
+        { title: "Hiika Jechootaa/Glossary" },
       ];
     }
     if (activeItem === "Deebilee Keenya") {
