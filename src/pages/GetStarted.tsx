@@ -37,6 +37,7 @@ const sidebarItems = [
   { label: "Eenyummaa keenya", icon: <Info size={20} /> },
   { label: "Kristiyaanotaaf", icon: <BookOpen size={20} /> },
   { label: "Kitaabota", icon: <Book size={20} /> },
+  { label: "Wantoota Hubachuu Qabnu", icon: <BookOpen size={20} /> },
 ];
 
 // Map card titles to their markdown slugs (defined in src/content/lessonSlugs.ts)
@@ -108,6 +109,19 @@ const cardSlugMap: Record<string, string> = {
   "Boqonnaa 12 – Musliimonni Warra Musliima Hintaane Akkamitti Ilaalu?": "dhuga-boq12",
   "Boqonnaa 13 – Musliimotaaf Akkamitti Ragaa Baana?": "dhuga-boq13",
   "Hiika Jechootaa/Glossary": "dhuga-glossary",
+  "SEENSA": "wanto-seensa",
+  "BOQONNAA 1 – Deebii Jaalalaan Kennuu": "wanto-boq1",
+  "BOQONNAA 2 – Kaayyoo Islaamummaan Afrikaa Irratti Qabu Hubachuu": "wanto-boq2",
+  "BOQONNAA 3 – Waldaan Gutuu Addunyaa Kiristiyaanota Biyyoota Musliimni Itti Baay'atu Keessa Jiraatan Gargaaruu Kan Dandeessu Akkamitti?": "wanto-boq3",
+  "BOQONNAA 4 – Biyyoota Islaama Hintaane Islaamessuuu": "wanto-boq4",
+  "BOQONNAA 5 – Tooftaawwan Baramoo Islaamaa Biyyoota Afrikaa Musliima Hin Ta'in Keessatti": "wanto-boq5",
+  "BOQONNAA 6 – Bu'uurota Kiristiyaanummaa Marii'annoodhaf hin Dhiyaanne": "wanto-boq6",
+  "BOQONNAA 7 – Amantoonni Hundinuu Wangeelaa Labsuu fi Tajaajiluu ni Danda'u": "wanto-boq7",
+  "BOQONNAA 8 – Yaa'ii Jamaa fi Falmii": "wanto-boq8",
+  "BOQONNAA 9 – Yaadota Mormisiisoo Wangeela Labsu Keessatti Argaman": "wanto-boq9",
+  "BOQONNAA 10 – Marii Amantaalee Gara Garaa Gidduutti Adeemsifamu": "wanto-boq10",
+  "BOQONNAA 11 – Jijjirama Fiduuf Waaqayyo Kan Isin Fayyadamuu Danda'u Haala Kamiini? (Kutaa-1)": "wanto-boq11",
+  "BOQONNAA 12 – Jijjirama Fiduuf Waaqayyo Kan Isin Fayyadamuu Danda'u Haala Kamiini? (Kutaa-2)": "wanto-boq12",
 };
 
 type Note = { id: string; text: string; createdAt: string };
@@ -260,6 +274,23 @@ export default function GetStarted() {
         { title: "Macaafa Qulqulluu – Kitaaba Ajaa'ibsiisaa" },
         { title: "Rakkina Islaamummaa" },
         { title: "Tawuraatii fi Injiliin Kitaaba Qulqulluudha?" },
+      ];
+    }
+    if (activeItem === "Wantoota Hubachuu Qabnu") {
+      return [
+        { title: "SEENSA" },
+        { title: "BOQONNAA 1 – Deebii Jaalalaan Kennuu" },
+        { title: "BOQONNAA 2 – Kaayyoo Islaamummaan Afrikaa Irratti Qabu Hubachuu" },
+        { title: "BOQONNAA 3 – Waldaan Gutuu Addunyaa Kiristiyaanota Biyyoota Musliimni Itti Baay'atu Keessa Jiraatan Gargaaruu Kan Dandeessu Akkamitti?" },
+        { title: "BOQONNAA 4 – Biyyoota Islaama Hintaane Islaamessuuu" },
+        { title: "BOQONNAA 5 – Tooftaawwan Baramoo Islaamaa Biyyoota Afrikaa Musliima Hin Ta'in Keessatti" },
+        { title: "BOQONNAA 6 – Bu'uurota Kiristiyaanummaa Marii'annoodhaf hin Dhiyaanne" },
+        { title: "BOQONNAA 7 – Amantoonni Hundinuu Wangeelaa Labsuu fi Tajaajiluu ni Danda'u" },
+        { title: "BOQONNAA 8 – Yaa'ii Jamaa fi Falmii" },
+        { title: "BOQONNAA 9 – Yaadota Mormisiisoo Wangeela Labsu Keessatti Argaman" },
+        { title: "BOQONNAA 10 – Marii Amantaalee Gara Garaa Gidduutti Adeemsifamu" },
+        { title: "BOQONNAA 11 – Jijjirama Fiduuf Waaqayyo Kan Isin Fayyadamuu Danda'u Haala Kamiini? (Kutaa-1)" },
+        { title: "BOQONNAA 12 – Jijjirama Fiduuf Waaqayyo Kan Isin Fayyadamuu Danda'u Haala Kamiini? (Kutaa-2)" },
       ];
     }
     return [1, 2, 3].map(() => ({ title: activeItem }));
