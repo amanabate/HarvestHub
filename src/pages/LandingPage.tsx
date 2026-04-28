@@ -1,11 +1,91 @@
 import Navbar from '../components/Navbar';
 import Logo from '../components/Logo';
+import Hero from '../components/Hero';
+import Features from '../components/Features';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import {
-  ChevronRight, BookOpen, PenTool, Users, Shield,
-  MessageCircle, Globe, ArrowRight, Star, CheckCircle
+  ChevronRight, BookOpen, Users, Shield,
+  MessageCircle, Globe, ArrowRight, CheckCircle, Send
 } from 'lucide-react';
+
+function ContactForm() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
+  if (sent) {
+    return (
+      <div className="bg-white border border-gray-100/80 rounded-[2rem] p-10 text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full flex flex-col justify-center items-center">
+        <div className="w-16 h-16 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl flex items-center justify-center text-green-500 mx-auto mb-6 shadow-sm border border-green-100">
+          <CheckCircle size={32} />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">Message Sent!</h3>
+        <p className="text-gray-500 mb-8 max-w-sm mx-auto">Thank you for sharing your idea. We'll review it and get back to you soon.</p>
+        <button
+          onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }}
+          className="text-sm font-bold text-primary-600 hover:text-primary-700 transition-colors uppercase tracking-wider"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-white border border-gray-100/80 rounded-[2rem] p-8 md:p-10 space-y-6 shadow-[0_8px_40px_rgb(0,0,0,0.04)] relative overflow-hidden group">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 via-orange-400 to-primary-600 opacity-50 group-hover:opacity-100 transition-opacity" />
+
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Your Name</label>
+          <input
+            type="text"
+            required
+            value={form.name}
+            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+            placeholder="Amanuel Abate"
+            className="w-full px-5 py-3.5 text-sm bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all placeholder-gray-400 font-medium"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Email Address</label>
+          <input
+            type="email"
+            required
+            value={form.email}
+            onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+            placeholder="amanuel@example.com"
+            className="w-full px-5 py-3.5 text-sm bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all placeholder-gray-400 font-medium"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Your Message or Idea</label>
+        <textarea
+          required
+          rows={5}
+          value={form.message}
+          onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+          placeholder="Share your idea, question, or suggestion with us..."
+          className="w-full px-5 py-3.5 text-sm bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all placeholder-gray-400 font-medium resize-none"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white text-sm font-bold rounded-2xl transition-all shadow-lg active:scale-[0.98] group/btn"
+      >
+        <Send size={16} className="group-hover/btn:rotate-12 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-all" />
+        Send Message
+      </button>
+    </form>
+  );
+}
 
 const topics = [
   "Waaqayoo Eenyu?", "Yesuus Eenyu", "Karaa fayyinaa",
@@ -13,206 +93,115 @@ const topics = [
   "Dubartoota fi Islaamummaa", "Shororkeessummaa", "Deebilee Keenya",
 ];
 
-const features = [
-  {
-    icon: <BookOpen size={22} />,
-    title: "Bible-Centered Lessons",
-    description: "Deep, scripture-rooted teachings that equip you to share the Gospel with clarity and confidence.",
-  },
-  {
-    icon: <MessageCircle size={22} />,
-    title: "Thoughtful Responses",
-    description: "Carefully crafted answers to the most common questions and objections from Muslim friends.",
-  },
-  {
-    icon: <PenTool size={22} />,
-    title: "Personal Notes",
-    description: "Take notes as you study. Your insights are saved per lesson so you can revisit them anytime.",
-  },
-  {
-    icon: <Shield size={22} />,
-    title: "Grounded in Truth",
-    description: "Every lesson is rooted in the authority of Scripture and historical Christian theology.",
-  },
-  {
-    icon: <Globe size={22} />,
-    title: "Afaan Oromo Content",
-    description: "All teachings are written in Afaan Oromo, making them accessible to your community.",
-  },
-  {
-    icon: <Users size={22} />,
-    title: "For Every Believer",
-    description: "Whether you're new to evangelism or experienced, HarvestHub meets you where you are.",
-  },
-];
-
-const stats = [
-  { value: "15+", label: "Topic Categories" },
-  { value: "100+", label: "Lessons Available" },
-  { value: "Afaan Oromo", label: "Primary Language" },
-  { value: "Free", label: "Always & Forever" },
-];
-
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50 font-sans selection:bg-primary-200 selection:text-primary-900 overflow-x-hidden">
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative pt-28 pb-20 overflow-hidden bg-gradient-to-b from-orange-50/60 to-white">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-100/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-50/60 rounded-full blur-[100px]" />
-        </div>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-100 text-orange-700 text-sm font-semibold rounded-full mb-6">
-              <Star size={14} className="fill-orange-500 text-orange-500" />
-              Bible-Based Evangelism Platform
-            </span>
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight mb-6">
-              Equip. Engage.<br />
-              <span className="text-orange-600">Reach the World.</span>
-            </h1>
-            <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto">
-              HarvestHub helps you learn, grow, and share the Gospel with confidence — with deep lessons in Afaan Oromo designed for reaching Muslim communities.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to="/get-started"
-                className="flex items-center gap-2 px-7 py-3.5 bg-orange-600 text-white rounded-xl font-semibold hover:bg-orange-700 transition-all shadow-lg shadow-orange-200 text-sm"
-              >
-                Start Learning
-                <ChevronRight size={18} />
-              </Link>
-              <a
-                href="#topics"
-                className="flex items-center gap-2 px-7 py-3.5 bg-white text-gray-800 border border-gray-200 rounded-xl font-semibold hover:bg-gray-50 transition-all text-sm"
-              >
-                Browse Topics
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4"
-          >
-            {stats.map((s, i) => (
-              <div key={i} className="bg-white border border-gray-100 rounded-2xl p-5 text-center shadow-sm">
-                <p className="text-2xl font-bold text-orange-600 mb-1">{s.value}</p>
-                <p className="text-sm text-gray-500 font-medium">{s.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      <Hero />
 
       {/* Topics */}
-      <section id="topics" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-orange-600 uppercase tracking-widest mb-3">What You'll Learn</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Topics Covered</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">Explore a wide range of subjects — from the nature of God to responding to Islamic objections.</p>
+      <section id="topics" className="py-24 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-3"
+            >
+              Curriculum Overview
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6"
+            >
+              Explore Our Topics
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-gray-500"
+            >
+              A comprehensive guide covering a wide range of subjects — from the nature of God to responding to Islamic objections with grace.
+            </motion.p>
           </div>
-          <div className="flex flex-wrap justify-center gap-3">
+
+          <div className="flex flex-wrap justify-center gap-4">
             {topics.map((topic, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.04, type: 'spring', stiffness: 100 }}
               >
                 <Link
                   to="/get-started"
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gray-50 hover:bg-orange-50 border border-gray-200 hover:border-orange-200 text-gray-700 hover:text-orange-700 rounded-xl text-sm font-medium transition-all"
+                  className="flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-gray-50 border border-gray-200 hover:border-primary-200 text-gray-700 hover:text-primary-700 rounded-full text-sm font-bold transition-all hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] group"
                 >
-                  <BookOpen size={14} className="text-orange-500" />
+                  <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-primary-100 flex items-center justify-center transition-colors">
+                    <BookOpen size={12} className="text-gray-500 group-hover:text-primary-600 transition-colors" />
+                  </div>
                   {topic}
                 </Link>
               </motion.div>
             ))}
           </div>
         </div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent absolute bottom-0 left-0 right-0 w-full" />
       </section>
 
-      {/* Features */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-orange-600 uppercase tracking-widest mb-3">Platform Features</p>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">Built to help you study deeply, respond wisely, and share boldly.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((f, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-md hover:border-orange-100 transition-all"
-              >
-                <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600 mb-4">
-                  {f.icon}
-                </div>
-                <h3 className="text-base font-bold text-gray-900 mb-2">{f.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Features />
 
       {/* Why HarvestHub */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="py-28 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <p className="text-sm font-semibold text-orange-600 uppercase tracking-widest mb-3">Why HarvestHub</p>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-snug">
-                Prepared to Share.<br />Confident to Engage.
+              <p className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-3">The Mission</p>
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-[1.1] tracking-tight">
+                Prepared to Share.<br />
+                <span className="text-gradient">Confident to Engage.</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-8">
-                Many believers want to share their faith with Muslim friends but don't know where to start. HarvestHub gives you the knowledge, tools, and confidence to have meaningful, respectful conversations rooted in Scripture.
+              <p className="text-lg text-gray-600 leading-relaxed mb-8 font-medium">
+                Many believers want to share their faith with Muslim friends but don't know where to start. HarvestHub provides the knowledge, tools, and confidence to have meaningful, respectful discussions rooted in truth.
               </p>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {[
-                  "Understand Islamic beliefs and how to respond biblically",
-                  "Learn from structured lessons organized by topic",
-                  "Take personal notes and track your growth",
-                  "Access all content free, anytime, in Afaan Oromo",
+                  "Grasp Islamic beliefs and how to respond biblically",
+                  "Learn from expertly crafted, structured lessons",
+                  "Take personal notes and monitor your spiritual growth",
+                  "Access premium content 100% free, localized in Afaan Oromo",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                    <CheckCircle size={18} className="text-orange-500 shrink-0 mt-0.5" />
-                    {item}
+                  <li key={i} className="flex items-start gap-4">
+                    <div className="mt-1 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0 border border-green-200/50">
+                      <CheckCircle size={14} className="text-green-600" />
+                    </div>
+                    <span className="text-gray-700 font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-3xl p-8 border border-orange-100">
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary-100 to-orange-50 rounded-[3rem] transform rotate-3 scale-105 opacity-50 blur-lg -z-10" />
+              <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 border border-gray-100/80 shadow-[0_8px_40px_rgb(0,0,0,0.06)]">
                 <div className="space-y-4">
                   {[
                     { label: "Waaqayoo Eenyu?", count: "4 lessons" },
@@ -221,23 +210,25 @@ export default function LandingPage() {
                     { label: "Shororkeessummaa", count: "13 lessons" },
                     { label: "Dhuga Ba'iinsota", count: "15 lessons" },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-orange-50 rounded-lg flex items-center justify-center">
-                          <BookOpen size={14} className="text-orange-600" />
+                    <div key={i} className="group flex items-center justify-between bg-gray-50/50 hover:bg-white rounded-2xl px-5 py-4 border border-gray-100 hover:border-primary-100 hover:shadow-sm transition-all duration-300 cursor-default">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-white group-hover:bg-primary-50 rounded-xl flex items-center justify-center shadow-sm border border-gray-100 group-hover:border-primary-100 transition-colors">
+                          <BookOpen size={18} className="text-gray-400 group-hover:text-primary-500 transition-colors" />
                         </div>
-                        <span className="text-sm font-semibold text-gray-800">{item.label}</span>
+                        <span className="text-base font-bold text-gray-800 group-hover:text-primary-700 transition-colors">{item.label}</span>
                       </div>
-                      <span className="text-xs font-medium text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">{item.count}</span>
+                      <span className="text-xs font-bold text-primary-600 bg-primary-50 px-3 py-1.5 rounded-full border border-primary-100/50">{item.count}</span>
                     </div>
                   ))}
-                  <Link
-                    to="/get-started"
-                    className="flex items-center justify-center gap-2 w-full py-3 bg-orange-600 hover:bg-orange-700 text-white text-sm font-semibold rounded-xl transition-all mt-2"
-                  >
-                    View All Topics
-                    <ArrowRight size={16} />
-                  </Link>
+                  <div className="pt-4">
+                    <Link
+                      to="/get-started"
+                      className="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white text-sm font-bold rounded-2xl transition-all shadow-md active:scale-[0.98]"
+                    >
+                      View All Free Topics
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -245,39 +236,96 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Contact / Share Your Idea */}
+      <section id="contact" className="py-28 bg-gray-50 relative border-t border-gray-200/50">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary-100/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-3">Get in Touch</p>
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
+                Share Your Idea<br />or Question
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed mb-10 font-medium">
+                Have a lesson idea, a question about the content, or want to contribute? We'd love to hear from you. Every voice matters in building this community.
+              </p>
+              <div className="space-y-6">
+                {[
+                  { icon: <MessageCircle size={20} />, label: "Share a lesson idea or topic suggestion" },
+                  { icon: <BookOpen size={20} />, label: "Report an error or suggest a correction" },
+                  { icon: <Users size={20} />, label: "Ask a question about the teachings" },
+                  { icon: <Globe size={20} />, label: "Collaborate or contribute localized content" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary-500 shrink-0 shadow-sm border border-gray-100 group-hover:border-primary-200 group-hover:bg-primary-50 transition-colors">
+                      {item.icon}
+                    </div>
+                    <span className="text-base font-bold text-gray-700">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right — Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <ContactForm />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="py-20 bg-orange-600">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">
               Ready to Start Your Journey?
             </h2>
-            <p className="text-orange-100 text-lg mb-8 leading-relaxed">
-              Join thousands of believers growing in their evangelism journey. All lessons are free and available in Afaan Oromo.
+            <p className="text-gray-300 text-xl md:text-2xl mb-10 leading-relaxed font-medium max-w-2xl mx-auto">
+              Join thousands of believers growing in their evangelism journey. Premium lessons, forever free in Afaan Oromo.
             </p>
             <Link
               to="/get-started"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-orange-600 rounded-xl font-bold hover:bg-orange-50 transition-all shadow-lg text-sm"
+              className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-primary-600 to-orange-400 border border-primary-500/50 text-white rounded-2xl font-bold hover:shadow-[0_8px_40px_rgb(240,70,0,0.4)] transition-all duration-300 hover:-translate-y-1 group"
             >
               Get Started — It's Free
-              <ChevronRight size={18} />
+              <ChevronRight size={20} className="group-hover:translate-x-1.5 transition-transform" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
+      <footer className="bg-gray-950 text-gray-500 py-12 border-t border-gray-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
             <Logo size="sm" linkTo="/" />
           </div>
-          <p className="text-sm text-center">Bible-based evangelism platform · Afaan Oromo · Free forever</p>
-          <p className="text-sm">© {new Date().getFullYear()} LightShare</p>
+          <p className="text-sm font-medium text-center">Bible-based evangelism platform · Afaan Oromo · Free forever</p>
+          <div className="flex items-center gap-4">
+            <a href="#" className="text-sm font-bold hover:text-gray-300 transition-colors">Privacy</a>
+            <a href="#" className="text-sm font-bold hover:text-gray-300 transition-colors">Terms</a>
+            <p className="text-sm ml-4">© {new Date().getFullYear()} LightShare</p>
+          </div>
         </div>
       </footer>
     </div>

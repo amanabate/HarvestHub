@@ -16,7 +16,9 @@ import {
   Plus,
   Trash2,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ChevronRight,
+  PenTool
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -300,42 +302,43 @@ export default function GetStarted() {
   const LogoSvg = ({ className }: { className?: string }) => null;
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50/50 font-sans selection:bg-primary-200 selection:text-primary-900">
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 h-screen sticky top-0 overflow-y-auto">
+      <aside className="hidden lg:flex flex-col w-72 bg-white border-r border-gray-100 shadow-[4px_0_24px_rgba(0,0,0,0.02)] h-screen sticky top-0 z-30">
         {/* Logo */}
-        <div className="px-5 py-5 border-b border-gray-100">
+        <div className="px-6 py-6 border-b border-gray-100/80 bg-white/50 backdrop-blur-sm sticky top-0 z-10">
           <Logo />
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-3 py-4 space-y-0.5">
+        <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto custom-scrollbar">
+          <p className="px-3 text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Library</p>
           {sidebarItems.map((item) => (
             <button
               key={item.label}
               onClick={() => setActiveItem(item.label)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all text-left ${
-                activeItem === item.label
-                  ? "bg-orange-50 text-orange-600 font-semibold"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium"
-              }`}
+              className={`w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm transition-all duration-300 text-left group
+                ${activeItem === item.label
+                  ? "bg-gradient-to-r from-primary-50 to-orange-50/50 text-primary-700 font-bold border border-primary-100 shadow-sm"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium border border-transparent"}
+              `}
             >
-              <span className={`shrink-0 ${activeItem === item.label ? "text-orange-500" : "text-gray-400"}`}>
+              <span className={`shrink-0 transition-colors duration-300 ${activeItem === item.label ? "text-primary-600" : "text-gray-400 group-hover:text-primary-500"}`}>
                 {item.icon}
               </span>
               <span className="truncate">{item.label}</span>
               {activeItem === item.label && (
-                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />
+                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0 shadow-[0_0_8px_rgba(255,92,10,0.5)]" />
               )}
             </button>
           ))}
         </nav>
 
         {/* Back to Home */}
-        <div className="px-3 py-4 border-t border-gray-100">
+        <div className="p-4 border-t border-gray-100/80 bg-gray-50/50 mt-auto">
           <button
             onClick={() => navigate('/')}
-            className="w-full flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-gray-600 hover:text-gray-900 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all shadow-sm active:scale-[0.98]"
           >
             <ChevronLeft size={16} />
             Back to Home
@@ -344,61 +347,64 @@ export default function GetStarted() {
       </aside>
 
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 z-40">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md border-b border-gray-200/50 flex items-center justify-between px-5 z-40 shadow-sm">
         <Logo size="sm" />
-        <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg" aria-label="Open sidebar">
-          <Menu size={20} />
+        <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors" aria-label="Open sidebar">
+          <Menu size={22} />
         </button>
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 pt-14 lg:pt-0 min-w-0">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 lg:py-10">
+      <main className="flex-1 pt-16 lg:pt-0 min-w-0 relative">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary-100/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-12 relative z-10">
           {activeSlug ? (
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
+            <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.3, type: "spring", bounce: 0 }}>
               <LessonContent slug={activeSlug} onBack={() => setActiveSlug(null)} />
             </motion.div>
           ) : (
             <>
               {/* Section Header */}
-              <div className="mb-8">
-                <div className="flex items-center gap-2 text-xs font-semibold text-orange-500 uppercase tracking-widest mb-2">
-                  <span className="w-4 h-px bg-orange-400" />
+              <div className="mb-10 lg:mb-12">
+                <div className="flex items-center gap-2 text-xs font-bold text-primary-600 uppercase tracking-widest mb-3">
+                  <span className="w-6 h-[2px] bg-primary-500 rounded-full" />
                   Lessons
                 </div>
-                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">{activeItem}</h2>
+                <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">{activeItem}</h2>
               </div>
 
               {/* Cards Grid */}
-              <div className="grid gap-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 {getActiveContent().map((content, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="group bg-white border border-gray-200 rounded-xl p-5 hover:border-orange-200 hover:shadow-md transition-all cursor-pointer"
+                    transition={{ delay: i * 0.05, duration: 0.4 }}
+                    className="group relative bg-white border border-gray-200/80 rounded-2xl p-5 sm:p-6 hover:border-primary-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all cursor-pointer overflow-hidden flex flex-col justify-between min-h-[140px]"
+                    onClick={() => {
+                      const slug = cardSlugMap[content.title];
+                      if (slug) setActiveSlug(slug);
+                    }}
                   >
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-4 min-w-0">
-                        <div className="w-9 h-9 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500 shrink-0 group-hover:bg-orange-100 transition-colors">
-                          <BookOpen size={18} />
-                        </div>
-                        <h3 className="text-sm font-semibold text-gray-800 group-hover:text-orange-600 transition-colors leading-snug line-clamp-2">
-                          {content.title}
-                        </h3>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-primary-50/0 group-hover:from-primary-50/40 group-hover:to-orange-50/40 transition-colors duration-500" />
+                    <div className="relative z-10 flex items-start gap-4 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-primary-50 group-hover:to-orange-100 flex items-center justify-center text-gray-400 group-hover:text-primary-600 shrink-0 border border-gray-200/60 group-hover:border-primary-200/60 transition-all duration-300">
+                        <BookOpen size={18} />
                       </div>
+                      <h3 className="text-base font-bold text-gray-800 group-hover:text-primary-700 transition-colors leading-snug line-clamp-3">
+                        {content.title}
+                      </h3>
+                    </div>
+
+                    <div className="relative z-10 mt-auto flex justify-end">
                       <button
-                        onClick={() => {
-                          const slug = cardSlugMap[content.title];
-                          if (slug) setActiveSlug(slug);
-                        }}
                         disabled={!cardSlugMap[content.title]}
-                        className="shrink-0 flex items-center gap-1 text-xs font-semibold text-orange-600 hover:text-orange-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-gray-500 group-hover:text-primary-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                       >
-                        Read
-                        <ChevronLeft size={14} className="rotate-180" />
+                        Read Lesson
+                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </motion.div>
@@ -406,21 +412,21 @@ export default function GetStarted() {
               </div>
 
               {/* Notes Section */}
-              <div className="mt-8">
+              <div className="mt-12">
                 <button
                   onClick={() => setNotesOpen(o => !o)}
-                  className="w-full flex items-center justify-between px-5 py-3.5 bg-white border border-gray-200 rounded-xl hover:border-orange-200 transition-all"
+                  className="w-full flex items-center justify-between px-6 py-4 bg-white border border-gray-200 rounded-2xl hover:border-primary-300 hover:shadow-md transition-all group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500">
-                      <StickyNote size={16} />
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-orange-50 group-hover:bg-primary-100 flex items-center justify-center text-orange-500 group-hover:text-primary-600 transition-colors border border-orange-100/50">
+                      <StickyNote size={18} />
                     </div>
-                    <span className="text-sm font-semibold text-gray-800">My Notes</span>
+                    <span className="text-base font-bold text-gray-800">My Notes for This Section</span>
                     {activeNotes.length > 0 && (
-                      <span className="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-0.5 rounded-full">{activeNotes.length}</span>
+                      <span className="bg-primary-100 border border-primary-200 text-primary-700 text-xs font-bold px-2.5 py-1 rounded-full">{activeNotes.length}</span>
                     )}
                   </div>
-                  {notesOpen ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+                  {notesOpen ? <ChevronUp size={20} className="text-gray-400" /> : <ChevronDown size={20} className="text-gray-400" />}
                 </button>
 
                 <AnimatePresence>
@@ -429,50 +435,60 @@ export default function GetStarted() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="mt-2 bg-white border border-gray-200 rounded-xl p-5 space-y-4">
-                        <div className="flex gap-3">
-                          <textarea
-                            value={noteInput}
-                            onChange={e => setNoteInput(e.target.value)}
-                            onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); addNote(); } }}
-                            placeholder="Write a note for this lesson..."
-                            rows={2}
-                            className="flex-1 resize-none text-sm text-gray-700 placeholder-gray-400 border border-gray-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-300 transition"
-                          />
-                          <button
-                            onClick={addNote}
-                            disabled={!noteInput.trim()}
-                            className="self-end flex items-center gap-1.5 px-4 py-2.5 bg-orange-600 hover:bg-orange-700 disabled:opacity-40 text-white text-sm font-semibold rounded-lg transition-all"
-                          >
-                            <Plus size={15} />
-                            Add
-                          </button>
+                      <div className="mt-3 bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 space-y-6 shadow-sm relative">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary-50 rounded-full blur-3xl" />
+
+                        <div className="relative">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">Reflect & Capture Insights</label>
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <textarea
+                              value={noteInput}
+                              onChange={e => setNoteInput(e.target.value)}
+                              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); addNote(); } }}
+                              placeholder="Write down what you've learned..."
+                              rows={3}
+                              className="flex-1 resize-none text-sm text-gray-700 placeholder-gray-400 bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all"
+                            />
+                            <button
+                              onClick={addNote}
+                              disabled={!noteInput.trim()}
+                              className="sm:self-end flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 disabled:opacity-40 disabled:from-gray-400 disabled:to-gray-400 text-white text-sm font-bold rounded-xl transition-all shadow-md active:scale-[0.98] sm:w-auto w-full"
+                            >
+                              <Plus size={16} />
+                              Save Note
+                            </button>
+                          </div>
                         </div>
+
                         {activeNotes.length === 0 ? (
-                          <p className="text-sm text-gray-400 text-center py-3">No notes yet. Add one above!</p>
+                          <div className="text-center py-10 px-4 border-2 border-dashed border-gray-100 rounded-xl bg-gray-50/50">
+                            <PenTool className="mx-auto text-gray-300 mb-3" size={24} />
+                            <p className="text-sm font-medium text-gray-500">No notes yet. Add your first note above!</p>
+                          </div>
                         ) : (
-                          <div className="space-y-2">
+                          <div className="space-y-3 pt-2">
                             {activeNotes.map(note => (
                               <motion.div
                                 key={note.id}
-                                initial={{ opacity: 0, y: -6 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -6 }}
-                                className="flex items-start gap-3 p-3.5 bg-orange-50 border border-orange-100 rounded-lg group/note"
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.98 }}
+                                className="flex items-start gap-4 p-5 bg-gradient-to-r from-orange-50/80 to-white border border-primary-100/50 rounded-xl group/note shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
                               >
-                                <div className="flex-1">
-                                  <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-wrap">{note.text}</p>
-                                  <p className="text-xs text-gray-400 mt-1">{note.createdAt}</p>
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-400 to-orange-400" />
+                                <div className="flex-1 ml-1">
+                                  <p className="text-sm text-gray-800 leading-relaxed font-medium whitespace-pre-wrap">{note.text}</p>
+                                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mt-3">{note.createdAt}</p>
                                 </div>
                                 <button
                                   onClick={() => deleteNote(note.id)}
-                                  className="opacity-0 group-hover/note:opacity-100 p-1 text-gray-400 hover:text-red-500 rounded transition-all"
+                                  className="md:opacity-0 group-hover/note:opacity-100 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
                                   aria-label="Delete note"
                                 >
-                                  <Trash2 size={14} />
+                                  <Trash2 size={16} />
                                 </button>
                               </motion.div>
                             ))}
@@ -495,38 +511,39 @@ export default function GetStarted() {
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setIsSidebarOpen(false)}
-              className="lg:hidden fixed inset-0 bg-black/40 z-[50]"
+              className="lg:hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-[50]"
             />
             <motion.aside
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 left-0 bottom-0 w-72 bg-white z-[60] shadow-2xl flex flex-col"
+              className="lg:hidden fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white z-[60] shadow-2xl flex flex-col"
             >
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+              <div className="flex items-center justify-between px-5 py-5 border-b border-gray-100">
                 <Logo size="sm" />
-                <button onClick={() => setIsSidebarOpen(false)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg transition-colors">
+                <button onClick={() => setIsSidebarOpen(false)} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-colors">
                   <X size={20} />
                 </button>
               </div>
-              <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-0.5">
+              <nav className="flex-1 overflow-y-auto px-4 py-4 space-y-1 custom-scrollbar">
+                <p className="px-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">Library</p>
                 {sidebarItems.map((item) => (
                   <button
                     key={item.label}
                     onClick={() => { setActiveItem(item.label); setIsSidebarOpen(false); }}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all text-left ${
-                      activeItem === item.label ? "bg-orange-50 text-orange-600 font-semibold" : "text-gray-600 hover:bg-gray-50 font-medium"
-                    }`}
+                    className={`w-full flex items-center gap-3 px-3 py-3.5 rounded-xl text-sm transition-all duration-300 text-left 
+                      ${activeItem === item.label ? "bg-gradient-to-r from-primary-50 to-orange-50 text-primary-700 font-bold border border-primary-100 shadow-sm" : "text-gray-600 hover:bg-gray-50 font-medium border border-transparent"}
+                    `}
                   >
-                    <span className={`shrink-0 ${activeItem === item.label ? "text-orange-500" : "text-gray-400"}`}>{item.icon}</span>
+                    <span className={`shrink-0 ${activeItem === item.label ? "text-primary-500" : "text-gray-400"}`}>{item.icon}</span>
                     <span className="truncate">{item.label}</span>
-                    {activeItem === item.label && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />}
+                    {activeItem === item.label && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0" />}
                   </button>
                 ))}
               </nav>
-              <div className="px-3 py-4 border-t border-gray-100">
+              <div className="p-4 border-t border-gray-100/80 bg-gray-50/50">
                 <button
                   onClick={() => navigate('/')}
-                  className="w-full flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-gray-600 hover:text-gray-900 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all shadow-sm active:scale-[0.98]"
                 >
                   <ChevronLeft size={16} />
                   Back to Home
@@ -536,6 +553,23 @@ export default function GetStarted() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Global CSS for custom scrollbar embedded for simplicity in component since it's small, though index.css is better */}
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background-color: #E5E7EB;
+          border-radius: 20px;
+        }
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+          background-color: #D1D5DB;
+        }
+      `}</style>
     </div>
   );
 }
