@@ -347,11 +347,22 @@ export default function GetStarted() {
       </aside>
 
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md border-b border-gray-200/50 flex items-center justify-between px-5 z-40 shadow-sm">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/80 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800 flex items-center justify-between px-5 z-40 shadow-sm">
         <Logo size="sm" />
-        <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors" aria-label="Open sidebar">
-          <Menu size={22} />
-        </button>
+        <div className="flex items-center gap-2">
+          {activeSlug && (
+            <button
+              onClick={() => setActiveSlug(null)}
+              className="flex items-center gap-1 text-xs font-semibold text-orange-600 px-3 py-1.5 bg-orange-50 dark:bg-orange-900/30 rounded-lg"
+            >
+              <ChevronLeft size={14} />
+              Lessons
+            </button>
+          )}
+          <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-xl transition-colors" aria-label="Open sidebar">
+            <Menu size={22} />
+          </button>
+        </div>
       </div>
 
       {/* Main Content Area */}
@@ -511,12 +522,12 @@ export default function GetStarted() {
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setIsSidebarOpen(false)}
-              className="lg:hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-[50]"
+              className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-[50]"
             />
             <motion.aside
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-gray-900 z-[60] shadow-2xl flex flex-col"
+              className="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-gray-900 z-[60] shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between px-5 py-5 border-b border-gray-100">
                 <Logo size="sm" />
