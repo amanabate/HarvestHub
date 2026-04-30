@@ -1,8 +1,26 @@
 import { ChevronRight, Users, Play } from 'lucide-react';
-import { motion, stagger, useAnimate } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+const verses = [
+  { text: "Go into all the world and preach the gospel to all creation.", ref: "Mark 16:15" },
+  { text: "How beautiful are the feet of those who bring good news!", ref: "Romans 10:15" },
+  { text: "You will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth.", ref: "Acts 1:8" },
+  { text: "For I am not ashamed of the gospel, because it is the power of God that brings salvation.", ref: "Romans 1:16" },
+  { text: "The harvest is plentiful but the workers are few. Ask the Lord of the harvest to send out workers.", ref: "Matthew 9:37–38" },
+];
 
 const Hero = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex(i => (i + 1) % verses.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center">
       {/* Background Ambience */}
@@ -22,8 +40,41 @@ const Hero = () => {
               Equip. Engage.<br />
               <span className="text-gradient-primary">Reach the World.</span>
             </h1>
+
+            {/* Animated Bible Verse */}
+            <div className="relative h-24 mb-4 overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0"
+                >
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed italic max-w-lg">
+                    "{verses[index].text}"
+                  </p>
+                  <span className="text-sm font-bold text-orange-600 mt-1 block">
+                    — {verses[index].ref}
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Verse indicator dots */}
+            <div className="flex gap-1.5 mb-8">
+              {verses.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? 'w-6 bg-orange-500' : 'w-1.5 bg-gray-300'}`}
+                />
+              ))}
+            </div>
+
             <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg leading-relaxed font-medium">
-              HarvestHub is a Bible-based evangelism platform that helps you learn, grow, and share the Gospel with absolute confidence.
+              LightShare is a Bible-based evangelism platform that helps you learn, grow, and share the Gospel with absolute confidence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Link
