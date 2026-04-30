@@ -1,35 +1,57 @@
 import Navbar from '../components/Navbar';
 import Logo from '../components/Logo';
 import Hero from '../components/Hero';
-import Features from '../components/Features';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import {
   ChevronRight, BookOpen, Users, Shield,
-  MessageCircle, Globe, ArrowRight, CheckCircle, Send
+  MessageCircle, Globe, ArrowRight, CheckCircle, Send, Star, Loader2
 } from 'lucide-react';
 
-function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || '';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '';
 
-  const handleSubmit = (e: React.FormEvent) => {
+function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    if (!formRef.current) return;
+    setSending(true);
+    setError('');
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setSent(true);
+      formRef.current.reset();
+    } catch (err: any) {
+      setError(err?.text || err?.message || 'Failed to send. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   if (sent) {
     return (
-      <div className="bg-white border border-gray-100/80 rounded-[2rem] p-10 text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full flex flex-col justify-center items-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl flex items-center justify-center text-green-500 mx-auto mb-6 shadow-sm border border-green-100">
-          <CheckCircle size={32} />
+      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 text-center">
+        <div className="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-4">
+          <CheckCircle size={28} />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">Message Sent!</h3>
-        <p className="text-gray-500 mb-8 max-w-sm mx-auto">Thank you for sharing your idea. We'll review it and get back to you soon.</p>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Message Sent!</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Thank you for sharing your idea. We'll get back to you soon.</p>
         <button
-          onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }}
-          className="text-sm font-bold text-primary-600 hover:text-primary-700 transition-colors uppercase tracking-wider"
+          onClick={() => setSent(false)}
+          className="mt-5 text-sm font-semibold text-orange-600 hover:text-orange-700 transition-colors"
         >
           Send another message
         </button>
@@ -38,50 +60,47 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-gray-100/80 rounded-[2rem] p-8 md:p-10 space-y-6 shadow-[0_8px_40px_rgb(0,0,0,0.04)] relative overflow-hidden group">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 via-orange-400 to-primary-600 opacity-50 group-hover:opacity-100 transition-opacity" />
-
-      <div className="grid sm:grid-cols-2 gap-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 space-y-5 shadow-sm">
+      <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Your Name</label>
+          <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5">Your Name</label>
           <input
             type="text"
+            name="from_name"
             required
-            value={form.name}
-            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             placeholder="Amanuel Abate"
-            className="w-full px-5 py-3.5 text-sm bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all placeholder-gray-400 font-medium"
+            className="w-full px-4 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-300 transition placeholder-gray-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           />
         </div>
         <div>
-          <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Email Address</label>
+          <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5">Email Address</label>
           <input
             type="email"
+            name="from_email"
             required
-            value={form.email}
-            onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-            placeholder="amanuel@example.com"
-            className="w-full px-5 py-3.5 text-sm bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all placeholder-gray-400 font-medium"
+            placeholder="amanuelabate@gmail.com"
+            className="w-full px-4 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-300 transition placeholder-gray-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           />
         </div>
       </div>
       <div>
-        <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide">Your Message or Idea</label>
+        <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5">Your Message or Idea</label>
         <textarea
           required
+          name="message"
           rows={5}
-          value={form.message}
-          onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-          placeholder="Share your idea, question, or suggestion with us..."
-          className="w-full px-5 py-3.5 text-sm bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400 focus:bg-white transition-all placeholder-gray-400 font-medium resize-none"
+          placeholder="Share your idea, question, or suggestion..."
+          className="w-full px-4 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-300 transition placeholder-gray-400 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
       </div>
+      {error && <p className="text-sm text-red-500">{error}</p>}
       <button
         type="submit"
-        className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white text-sm font-bold rounded-2xl transition-all shadow-lg active:scale-[0.98] group/btn"
+        disabled={sending}
+        className="w-full flex items-center justify-center gap-2 py-3 bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-orange-100"
       >
-        <Send size={16} className="group-hover/btn:rotate-12 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-all" />
-        Send Message
+        {sending ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+        {sending ? 'Sending...' : 'Send Message'}
       </button>
     </form>
   );
@@ -97,10 +116,9 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans selection:bg-primary-200 selection:text-primary-900 overflow-x-hidden">
       <Navbar />
-
       <Hero />
 
-      {/* Topics */}
+      {/* Hero */}
       <section id="topics" className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -157,9 +175,7 @@ export default function LandingPage() {
         <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent absolute bottom-0 left-0 right-0 w-full" />
       </section>
 
-      <Features />
-
-      {/* Why HarvestHub */}
+      {/* Features */}
       <section className="py-28 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -201,7 +217,7 @@ export default function LandingPage() {
               className="relative"
             >
               <div className="absolute -inset-4 bg-gradient-to-tr from-primary-100 to-orange-50 rounded-[3rem] transform rotate-3 scale-105 opacity-50 blur-lg -z-10" />
-              <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 border border-gray-100/80 shadow-[0_8px_40px_rgb(0,0,0,0.06)]">
+              <div className="bg-white/80 dark:bg-gray-900/90 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 border border-gray-100/80 dark:border-gray-700 shadow-[0_8px_40px_rgb(0,0,0,0.06)]">
                 <div className="space-y-4">
                   {[
                     { label: "Waaqayoo Eenyu?", count: "4 lessons" },
@@ -210,14 +226,14 @@ export default function LandingPage() {
                     { label: "Shororkeessummaa", count: "13 lessons" },
                     { label: "Dhuga Ba'iinsota", count: "15 lessons" },
                   ].map((item, i) => (
-                    <div key={i} className="group flex items-center justify-between bg-gray-50/50 hover:bg-white rounded-2xl px-5 py-4 border border-gray-100 hover:border-primary-100 hover:shadow-sm transition-all duration-300 cursor-default">
+                    <div key={i} className="group flex items-center justify-between bg-gray-50/50 dark:bg-gray-800/60 hover:bg-white dark:hover:bg-gray-800 rounded-2xl px-5 py-4 border border-gray-100 dark:border-gray-700 hover:border-primary-100 hover:shadow-sm transition-all duration-300 cursor-default">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-white group-hover:bg-primary-50 rounded-xl flex items-center justify-center shadow-sm border border-gray-100 group-hover:border-primary-100 transition-colors">
+                        <div className="w-10 h-10 bg-white dark:bg-gray-700 group-hover:bg-primary-50 rounded-xl flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-600 group-hover:border-primary-100 transition-colors">
                           <BookOpen size={18} className="text-gray-400 group-hover:text-primary-500 transition-colors" />
                         </div>
-                        <span className="text-base font-bold text-gray-800 group-hover:text-primary-700 transition-colors">{item.label}</span>
+                        <span className="text-base font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-700 transition-colors">{item.label}</span>
                       </div>
-                      <span className="text-xs font-bold text-primary-600 bg-primary-50 px-3 py-1.5 rounded-full border border-primary-100/50">{item.count}</span>
+                      <span className="text-xs font-bold text-primary-600 bg-primary-50 dark:bg-orange-900/30 px-3 py-1.5 rounded-full border border-primary-100/50">{item.count}</span>
                     </div>
                   ))}
                   <div className="pt-4">

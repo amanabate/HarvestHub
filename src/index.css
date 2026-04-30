@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -21,10 +23,73 @@
     @apply antialiased text-gray-900 bg-[#fafafa];
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  .dark body {
+    @apply text-gray-100 bg-gray-950;
+  }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight;
   }
+}
+
+/* ── Global dark mode overrides ── */
+.dark {
+  color-scheme: dark;
+  background-color: #030712; /* gray-950 */
+  color: #f3f4f6; /* gray-100 */
+}
+
+/* Backgrounds */
+.dark .bg-white        { background-color: #111827 !important; } /* gray-900 */
+.dark .bg-\[\#fafafa\] { background-color: #030712 !important; }
+.dark .bg-gray-50      { background-color: #0f172a !important; } /* slate-900 */
+.dark .bg-gray-100     { background-color: #1e293b !important; } /* slate-800 */
+.dark .bg-gray-200     { background-color: #334155 !important; }
+.dark .bg-orange-50    { background-color: #1c1008 !important; }
+.dark .bg-orange-100   { background-color: #2d1a08 !important; }
+
+/* Text */
+.dark .text-gray-900   { color: #f9fafb !important; }
+.dark .text-gray-800   { color: #f3f4f6 !important; }
+.dark .text-gray-700   { color: #e5e7eb !important; }
+.dark .text-gray-600   { color: #d1d5db !important; }
+.dark .text-gray-500   { color: #9ca3af !important; }
+.dark .text-gray-400   { color: #6b7280 !important; }
+
+/* Borders */
+.dark .border-gray-100 { border-color: #1f2937 !important; }
+.dark .border-gray-200 { border-color: #374151 !important; }
+.dark .border-gray-300 { border-color: #4b5563 !important; }
+
+/* Navbar */
+.dark nav.fixed {
+  background-color: rgba(3, 7, 18, 0.85) !important;
+  border-color: #1f2937 !important;
+}
+
+/* Cards */
+.dark .bg-white.border { background-color: #111827 !important; }
+
+/* Section backgrounds */
+.dark section { background-color: #030712 !important; }
+.dark main    { background-color: #030712 !important; }
+.dark footer  { background-color: #000000 !important; }
+
+/* Gradient backgrounds */
+.dark .bg-gradient-to-b { background: #030712 !important; }
+.dark .bg-orange-600 { background-color: #ea580c !important; }
+
+/* Inputs */
+.dark input,
+.dark textarea {
+  background-color: #1f2937 !important;
+  color: #f3f4f6 !important;
+  border-color: #374151 !important;
+}
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #6b7280 !important;
 }
 
 @layer utilities {

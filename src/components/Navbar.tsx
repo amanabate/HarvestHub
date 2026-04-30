@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,8 @@ const Navbar = () => {
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <button
               className="px-5 py-2.5 text-sm font-bold text-gray-700 hover:text-primary-600 hover:bg-orange-50 rounded-xl transition-colors"
               aria-label="Log in to your account"

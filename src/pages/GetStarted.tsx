@@ -302,9 +302,9 @@ export default function GetStarted() {
   const LogoSvg = ({ className }: { className?: string }) => null;
 
   return (
-    <div className="flex min-h-screen bg-gray-50/50 font-sans selection:bg-primary-200 selection:text-primary-900">
+    <div className="flex min-h-screen bg-gray-50/50 dark:bg-gray-950 font-sans selection:bg-primary-200 selection:text-primary-900">
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:flex flex-col w-72 bg-white border-r border-gray-100 shadow-[4px_0_24px_rgba(0,0,0,0.02)] h-screen sticky top-0 z-30">
+      <aside className="hidden lg:flex flex-col w-72 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 shadow-[4px_0_24px_rgba(0,0,0,0.02)] h-screen sticky top-0 z-30">
         {/* Logo */}
         <div className="px-6 py-6 border-b border-gray-100/80 bg-white/50 backdrop-blur-sm sticky top-0 z-10">
           <Logo />
@@ -516,7 +516,7 @@ export default function GetStarted() {
             <motion.aside
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white z-[60] shadow-2xl flex flex-col"
+              className="lg:hidden fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-gray-900 z-[60] shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between px-5 py-5 border-b border-gray-100">
                 <Logo size="sm" />

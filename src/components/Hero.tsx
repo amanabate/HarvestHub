@@ -18,19 +18,6 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50/50 backdrop-blur-sm border border-primary-100 text-primary-700 text-sm font-bold rounded-full mb-8 shadow-sm"
-            >
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
-              </span>
-              Premium Evangelism Platform
-            </motion.div>
-
             <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.1] mb-6">
               Equip. Engage.<br />
               <span className="text-gradient-primary">Reach the World.</span>
@@ -58,30 +45,6 @@ const Hero = () => {
               </button>
             </div>
 
-            {/* Social Proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex items-center gap-4"
-            >
-              <div className="flex -space-x-3" aria-hidden="true">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-gray-100 shadow-sm relative z-10 hover:z-20 hover:scale-110 transition-transform">
-                    <img
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 15}`}
-                      alt="User avatar"
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-gray-500 font-medium">
-                <span className="font-bold text-gray-900">Join 12,400+</span> believers growing<br />
-                in their evangelism journey
-              </p>
-            </motion.div>
           </motion.div>
 
           {/* Hero Image Container */}
@@ -104,23 +67,6 @@ const Hero = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-900/40 via-transparent to-transparent mix-blend-overlay" />
             </div>
-
-            {/* Floating Badge */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, type: 'spring', bounce: 0.4 }}
-              className="relative z-30 mr-4 lg:mr-8 glass-card p-5 rounded-2xl flex items-center gap-4 group hover:scale-105 transition-all cursor-default"
-              aria-label="Current statistics: 12,400+ Active Learners"
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-orange-100 rounded-full flex items-center justify-center text-primary-600 shadow-inner border border-white">
-                <Users size={22} className="group-hover:scale-110 transition-transform" />
-              </div>
-              <div>
-                <p className="text-[11px] text-primary-600/80 font-bold tracking-widest uppercase mb-0.5">Active Status</p>
-                <p className="text-lg font-extrabold text-gray-900">12,400+ Students</p>
-              </div>
-            </motion.div>
 
             {/* Subtle decorative circles */}
             <div className="absolute top-1/4 -right-10 w-48 h-48 bg-primary-400/20 rounded-full blur-[80px] -z-10 animate-pulse" />
