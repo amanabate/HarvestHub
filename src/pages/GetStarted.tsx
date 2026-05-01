@@ -366,7 +366,7 @@ export default function GetStarted() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 pt-16 lg:pt-0 min-w-0 relative">
+      <main className="flex-1 pt-16 lg:pt-0 min-w-0 overflow-x-hidden relative">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary-100/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-12 relative z-10">
@@ -449,7 +449,7 @@ export default function GetStarted() {
                       transition={{ duration: 0.3, ease: 'easeOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="mt-3 bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 space-y-6 shadow-sm relative">
+                      <div className="mt-3 bg-white border border-gray-200 rounded-2xl p-4 lg:p-8 space-y-6 shadow-sm relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary-50 rounded-full blur-3xl" />
 
                         <div className="relative">
