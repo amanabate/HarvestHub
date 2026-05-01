@@ -130,6 +130,45 @@ const cardSlugMap: Record<string, string> = {
 type Note = { id: string; text: string; createdAt: string };
 type NotesMap = Record<string, Note[]>;
 
+function NoteCard({ note, onDelete }: { note: Note; onDelete: (id: string) => void }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = note.text.length > 120;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      className="relative overflow-hidden rounded-xl border border-orange-100 dark:border-orange-900/40 bg-orange-50 dark:bg-gray-800 shadow-sm group/note"
+    >
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-400 to-orange-600" />
+      <div className="flex items-start gap-3 p-4 pl-5">
+        <div className="flex-1 min-w-0">
+          <p className={`text-sm text-gray-800 dark:text-gray-100 leading-relaxed font-medium whitespace-pre-wrap ${!expanded && isLong ? 'line-clamp-3' : ''}`}>
+            {note.text}
+          </p>
+          {isLong && (
+            <button
+              onClick={() => setExpanded(e => !e)}
+              className="text-xs font-semibold text-orange-600 hover:text-orange-700 mt-1 transition-colors"
+            >
+              {expanded ? 'Show less ▲' : 'Show more ▼'}
+            </button>
+          )}
+          <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wide mt-2">{note.createdAt}</p>
+        </div>
+        <button
+          onClick={() => onDelete(note.id)}
+          className="shrink-0 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-all opacity-60 hover:opacity-100"
+          aria-label="Delete note"
+        >
+          <Trash2 size={15} />
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function GetStarted() {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -482,26 +521,7 @@ export default function GetStarted() {
                         ) : (
                           <div className="space-y-3 pt-2">
                             {activeNotes.map(note => (
-                              <motion.div
-                                key={note.id}
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.98 }}
-                                className="flex items-start gap-4 p-5 bg-gradient-to-r from-orange-50/80 to-white border border-primary-100/50 rounded-xl group/note shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
-                              >
-                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-400 to-orange-400" />
-                                <div className="flex-1 ml-1">
-                                  <p className="text-sm text-gray-800 leading-relaxed font-medium whitespace-pre-wrap">{note.text}</p>
-                                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wide mt-3">{note.createdAt}</p>
-                                </div>
-                                <button
-                                  onClick={() => deleteNote(note.id)}
-                                  className="md:opacity-0 group-hover/note:opacity-100 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                                  aria-label="Delete note"
-                                >
-                                  <Trash2 size={16} />
-                                </button>
-                              </motion.div>
+                              <NoteCard key={note.id} note={note} onDelete={deleteNote} />
                             ))}
                           </div>
                         )}
