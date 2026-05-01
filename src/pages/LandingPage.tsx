@@ -150,7 +150,7 @@ export default function LandingPage() {
             </motion.p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2 sm:gap-4">
             {topics.map((topic, i) => (
               <motion.div
                 key={i}
@@ -161,12 +161,12 @@ export default function LandingPage() {
               >
                 <Link
                   to="/get-started"
-                  className="flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-gray-50 border border-gray-200 hover:border-primary-200 text-gray-700 hover:text-primary-700 rounded-full text-sm font-bold transition-all hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] group"
+                  className="flex items-center gap-2 px-3 py-2 sm:px-6 sm:py-3.5 bg-white hover:bg-gray-50 border border-gray-200 hover:border-primary-200 text-gray-700 hover:text-primary-700 rounded-full text-xs sm:text-sm font-semibold transition-all hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] group w-full justify-center"
                 >
-                  <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-primary-100 flex items-center justify-center transition-colors">
-                    <BookOpen size={12} className="text-gray-500 group-hover:text-primary-600 transition-colors" />
+                  <div className="w-5 h-5 rounded-full bg-gray-100 group-hover:bg-primary-100 flex items-center justify-center transition-colors shrink-0">
+                    <BookOpen size={10} className="text-gray-500 group-hover:text-primary-600 transition-colors" />
                   </div>
-                  {topic}
+                  <span className="truncate">{topic}</span>
                 </Link>
               </motion.div>
             ))}
@@ -176,7 +176,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="py-28 bg-white relative">
+      <section id="about" className="py-28 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div

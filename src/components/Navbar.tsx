@@ -1,21 +1,45 @@
 import { Search, Menu, X, ChevronRight, BookOpen, PenTool, Target, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
+
+const navLinks = [
+  { label: 'Home',      href: '/'          },
+  { label: 'Lessons',   href: '/#topics'   },
+  { label: 'About',     href: '/#about'    },
+  { label: 'Resources', href: '/get-started' },
+  { label: 'Contact',   href: '/#contact'  },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    if (href.startsWith('/#')) {
+      const id = href.slice(2);
+      if (location.pathname === '/') {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        navigate('/');
+        setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 300);
+      }
+    } else {
+      navigate(href);
+    }
+  };
 
   return (
     <nav
@@ -30,13 +54,14 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8" role="navigation">
-            {['Home', 'Lessons', 'About', 'Resources', 'Contact'].map((item) => (
+            {navLinks.map(({ label, href }) => (
               <a
-                key={item}
-                href="#"
+                key={label}
+                href={href}
+                onClick={e => handleNav(e, href)}
                 className="text-sm font-semibold text-gray-600 hover:text-primary-600 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-right hover:after:origin-left pb-1"
               >
-                {item}
+                {label}
               </a>
             ))}
           </div>
@@ -105,14 +130,14 @@ const Navbar = () => {
               aria-label="Mobile menu"
             >
               <div className="px-6 py-6 space-y-6">
-                {['Home', 'Lessons', 'About', 'Resources', 'Contact'].map((item) => (
+                {navLinks.map(({ label, href }) => (
                   <a
-                    key={item}
-                    href="#"
-                    onClick={() => setIsOpen(false)}
+                    key={label}
+                    href={href}
+                    onClick={e => handleNav(e, href)}
                     className="block text-lg font-bold text-gray-800 hover:text-primary-600 border-b border-gray-100 pb-3 transition-colors"
                   >
-                    {item}
+                    {label}
                   </a>
                 ))}
 
