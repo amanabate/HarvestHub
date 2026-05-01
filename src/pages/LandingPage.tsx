@@ -13,6 +13,7 @@ import {
 const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || '';
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
 const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '';
+const EMAILJS_AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID || '';
 
 function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,12 +27,22 @@ function ContactForm() {
     setSending(true);
     setError('');
     try {
+      // Send notification to you
       await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         formRef.current,
         { publicKey: EMAILJS_PUBLIC_KEY }
       );
+      // Send auto-reply to the sender
+      if (EMAILJS_AUTOREPLY_TEMPLATE_ID) {
+        await emailjs.sendForm(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_AUTOREPLY_TEMPLATE_ID,
+          formRef.current,
+          { publicKey: EMAILJS_PUBLIC_KEY }
+        );
+      }
       setSent(true);
       formRef.current.reset();
     } catch (err: any) {
@@ -317,7 +328,7 @@ export default function LandingPage() {
               Ready to Start Your Journey?
             </h2>
             <p className="text-gray-300 text-xl md:text-2xl mb-10 leading-relaxed font-medium max-w-2xl mx-auto">
-              Join thousands of believers growing in their evangelism journey. Premium lessons, forever free in Afaan Oromo.
+              "Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit." — Matthew 28:19
             </p>
             <Link
               to="/get-started"
